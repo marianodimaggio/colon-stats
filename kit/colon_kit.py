@@ -713,3 +713,76 @@ def build_caratula(header_txt, linea1, linea2, bajada, dato_num, dato_label,
         yy += 36
     img.save(outpath, 'JPEG', quality=92)
     return outpath
+
+
+def build_llave(etapa_txt, label_lines, sub_lines, colon_val, rival_val, rival_nombre,
+                mejor_es_mayor, contexto_izq, contexto_der, lectura, outpath,
+                decimales=2, sufijo='', fuente_txt='Fuente: FootyStats'):
+    """Placa del REDUCIDO. Cambia el marco de comparacion respecto de la placa de fecha.
+
+    En la fase regular comparabamos contra el promedio del equipo y su puesto entre 36.
+    En el Reducido eso no sirve: un partido no mueve un promedio de 33, y despues de la
+    primera fase ya no hay 36 equipos contra quien rankear. Aca se compara contra el
+    rival de la llave, que es la unica comparacion que importa en un mata-mata.
+
+    colon_val y rival_val son el dato de cada uno; mejor_es_mayor define quien gana la
+    comparacion. El panel rojo lleva el numero del rival, no el puesto.
+    """
+    img, draw, crest = _base_canvas(None, header_txt=etapa_txt)
+    LIM = SPLIT_X - 30
+    fmt = lambda v: f'{v:.{decimales}f}{sufijo}'
+
+    y = 206
+    lf = F(MONO_M, 46)
+    for ln in label_lines:
+        draw.text((46, y), ln, font=lf, fill='#FFC533', stroke_width=2, stroke_fill='#FFC533')
+        y += 58
+    for ln in sub_lines:
+        draw.text((46, y), ln, font=F(MONO_M, LABEL), fill='#A9B4BE')
+        y += 34
+
+    # --- el cara a cara: dos barras proporcionales ---
+    y += 26
+    # la escala va por valor absoluto: con metricas negativas (xG vs Real) tomar el
+    # maximo a secas hace que la barra mas chica se dibuje mas larga que el panel.
+    tope = max(abs(colon_val), abs(rival_val)) or 1
+    gana_colon = (colon_val > rival_val) if mejor_es_mayor else (colon_val < rival_val)
+    for nombre, val, es_colon in [('COLÓN', colon_val, True), (rival_nombre.upper(), rival_val, False)]:
+        gana = (es_colon and gana_colon) or (not es_colon and not gana_colon)
+        col = '#C8102E' if gana else '#2a2a2a'
+        txt_col = '#FFFFFF' if gana else '#8C99A8'
+        draw.text((46, y), nombre, font=F(MONO_M, 30), fill='#FFC533' if es_colon else '#8C99A8')
+        bx0, bw = 46, LIM - 46 - 150
+        draw.rounded_rectangle([bx0, y + 46, bx0 + bw, y + 70], 10, fill='#161616')
+        draw.rounded_rectangle([bx0, y + 46, bx0 + int(bw * abs(val) / abs(tope)), y + 70], 10, fill=col)
+        fn = F(BEBAS, 62)
+        t = fmt(val)
+        draw.text((LIM - draw.textbbox((0, 0), t, font=fn)[2], y + 20), t, font=fn, fill=txt_col)
+        y += 116
+
+    draw.line([(46, y + 4), (LIM, y + 4)], fill='#2a0810', width=2)
+    y += 28
+    for ln in lectura:
+        draw.text((46, y), ln, font=F(MONO_M, 26), fill='#A9B4BE')
+        y += 36
+    draw.text((46, H - 76), fuente_txt, font=F(MONO_R, MICRO), fill='#7a7a7a')
+
+    # --- panel rojo: el dato del rival en su contexto, no el puesto ---
+    px, cx = SPLIT_X + 40, SPLIT_X + (W - SPLIT_X) // 2
+    draw.text((px, 196), rival_nombre.upper(), font=F(MONO_M, LABEL), fill='#FFC533')
+    fn = F(BEBAS, 150)
+    t = fmt(rival_val)
+    bb = draw.textbbox((0, 0), t, font=fn)
+    draw.text((cx - bb[2] // 2 - bb[0], 236), t, font=fn, fill='#FFC533')
+    yy = 236 + bb[3] + 20
+    for ln in contexto_der:
+        draw.text((px, yy), ln, font=F(MONO_M, 23), fill='#FFC533')
+        yy += 32
+    draw.line([(px, yy + 16), (W - 40, yy + 16)], fill='#FFC533', width=2)
+    yy += 48
+    for ln in contexto_izq:
+        draw.text((px, yy), ln, font=F(MONO_M, 22), fill='#FFC533')
+        yy += 30
+    draw.text((px, H - 58), 'PARTIDO ÚNICO', font=F(MONO_R, 20), fill='#FFC533')
+    img.save(outpath, 'JPEG', quality=92)
+    return outpath

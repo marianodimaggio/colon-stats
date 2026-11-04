@@ -3,131 +3,62 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Qué mide cada número · Colón Stats</title>
-<meta name="description" content="Guía de las estadísticas que usamos en los hilos de Colón de Santa Fe: qué mide cada una, qué no mide, y el caso de la Primera Nacional 2026 que la hace evidente.">
+<meta name="description" content="Las estadísticas de fútbol explicadas con un gráfico cada una, usando los datos reales de Colón en la Primera Nacional 2026.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
- :root{
-   --bg:#080808; --panel:#0d0d0d; --linea:#1f1f1f; --rojo:#C8102E;
-   --oro:#FFC533; --gris:#A9B4BE; --texto:#E8E8E8; --acero:#8C99A8;
-   color-scheme:dark;
-   box-sizing:border-box;
-   padding-top:env(safe-area-inset-top,0px);
-   padding-bottom:env(safe-area-inset-bottom,0px);
- }
- *,*::before,*::after{box-sizing:inherit}
- html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
- body{margin:0;background:var(--bg);color:var(--texto);
-      font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-      font-size:15px;line-height:1.65;-webkit-text-size-adjust:100%}
-
- header{padding:46px 20px 34px;
-   background:linear-gradient(90deg,var(--bg) 0%,var(--bg) 62%,var(--rojo) 62%,var(--rojo) 100%);
-   border-bottom:2px solid #2a0810}
- .wrap{max-width:860px;margin:0 auto;padding:0 20px}
- header .wrap{padding:0 20px}
- .kick{color:var(--oro);font-size:12px;letter-spacing:.14em;margin-bottom:10px}
- h1{font-family:"Bebas Neue",Impact,sans-serif;font-size:clamp(38px,8vw,64px);
-    line-height:.98;margin:0 0 12px;letter-spacing:.01em}
- header p{color:var(--gris);margin:0;max-width:34em}
-
- nav{position:sticky;top:0;z-index:10;background:rgba(8,8,8,.94);
-     backdrop-filter:blur(8px);border-bottom:1px solid var(--linea);
-     padding-top:env(safe-area-inset-top,0px)}
- nav .wrap{display:flex;gap:6px;overflow-x:auto;padding:12px 20px;
-           scrollbar-width:none}
- nav .wrap::-webkit-scrollbar{display:none}
- nav a{color:var(--gris);text-decoration:none;font-size:12.5px;white-space:nowrap;
-       padding:7px 12px;border:1px solid var(--linea);border-radius:7px}
- nav a:hover{color:var(--oro);border-color:var(--oro)}
-
- main{padding:40px 0 70px}
- section{margin:0 0 18px;background:var(--panel);border:1px solid var(--linea);
-         border-radius:14px;padding:26px 24px;scroll-margin-top:84px}
- section h2{font-family:"Bebas Neue",Impact,sans-serif;font-size:34px;line-height:1;
-            color:var(--oro);margin:0 0 4px;letter-spacing:.02em}
- .sigla{color:var(--acero);font-size:12px;letter-spacing:.1em;margin:0 0 18px}
- section p{margin:0 0 14px}
- .no{border-left:3px solid var(--rojo);padding:2px 0 2px 16px;color:var(--gris);
-     margin:18px 0}
- .no b{color:var(--texto);font-weight:500}
-
- .caso{margin:20px 0 4px;padding:18px 18px 16px;background:#000;
-       border:1px solid var(--linea);border-radius:10px}
- .caso .et{color:var(--oro);font-size:11px;letter-spacing:.12em;margin-bottom:10px}
- .caso .dato{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:10px}
- .caso .num{font-family:"Bebas Neue",Impact,sans-serif;font-size:52px;line-height:.9;
-            color:#fff}
- .caso .eq{color:var(--oro);font-size:15px}
- .caso p{margin:0;color:var(--gris);font-size:14px}
-
- table{width:100%;border-collapse:collapse;margin:16px 0 4px;font-size:13.5px}
- th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--linea)}
- th{color:var(--oro);font-weight:500;font-size:11.5px;letter-spacing:.08em}
- td.n{text-align:right;font-variant-numeric:tabular-nums}
- tr.destaca td{background:rgba(200,16,46,.14);color:#fff}
- .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-
- footer{border-top:1px solid var(--linea);padding:30px 0 60px;color:#6a6a6a;font-size:12.5px}
- footer a{color:var(--gris)}
- a.ext{color:var(--oro)}
-
- /* --- explicador visual de xG --- */
- .cancha{margin:22px 0 6px;background:#000;border:1px solid var(--linea);
-         border-radius:10px;padding:18px}
- .cancha svg{width:100%;height:auto;display:block}
- .leyenda{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:12.5px;
-          color:var(--gris)}
- .leyenda span{display:flex;align-items:center;gap:7px}
- .leyenda i{width:13px;height:13px;border-radius:50%;background:var(--rojo);
-            display:inline-block}
- .leyenda i.chico{width:7px;height:7px;opacity:.55}
- .suma{margin-top:16px;padding-top:14px;border-top:1px solid var(--linea);
-       display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
- .suma b{font-family:"Bebas Neue",Impact,sans-serif;font-size:38px;color:var(--oro);
-         line-height:1}
- .suma span{color:var(--gris);font-size:13.5px}
-
- /* --- barras comparativas y dispersion --- */
- .viz{margin:22px 0 6px;background:#000;border:1px solid var(--linea);
-      border-radius:10px;padding:18px}
- .viz svg{width:100%;height:auto;display:block}
- .viz .pie{margin-top:14px;padding-top:13px;border-top:1px solid var(--linea);
-           color:var(--gris);font-size:13.5px}
- .viz .pie b{color:var(--oro)}
+:root{--bg:#070707;--card:#0c0c0c;--linea:#1c1c1c;--rojo:#C8102E;--oro:#FFC533;
+--gris:#9AA4AE;--texto:#EDEDED;--acero:#6E7A86;color-scheme:dark;box-sizing:border-box;
+padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 68px)}
+body{margin:0;background:var(--bg);color:var(--texto);
+font-family:"DM Mono",ui-monospace,Menlo,monospace;font-size:15px;line-height:1.6;
+-webkit-text-size-adjust:100%}
+.wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+.hero{min-height:58vh;display:flex;align-items:center;border-bottom:1px solid var(--linea);
+background:radial-gradient(860px 400px at 80% 45%,rgba(200,16,46,.24),transparent 62%)}
+.hero .k{color:var(--oro);font-size:11px;letter-spacing:.22em;margin-bottom:18px}
+.hero h1{font-family:"Bebas Neue",Impact,sans-serif;font-size:clamp(56px,12vw,124px);
+line-height:.85;margin:0 0 22px}
+.hero h1 em{font-style:normal;color:var(--oro)}
+.hero p{color:var(--gris);max-width:28em;margin:0;font-size:16px}
+nav{position:sticky;top:0;z-index:20;background:rgba(7,7,7,.93);backdrop-filter:blur(10px);
+border-bottom:1px solid var(--linea);padding-top:env(safe-area-inset-top,0px)}
+nav .wrap{display:flex;gap:3px;overflow-x:auto;padding:10px 22px;scrollbar-width:none}
+nav .wrap::-webkit-scrollbar{display:none}
+nav a{color:var(--acero);text-decoration:none;font-size:12px;white-space:nowrap;
+padding:7px 13px;border-radius:20px;transition:.15s}
+nav a:hover{color:var(--oro);background:rgba(255,197,51,.1)}
+main{padding:50px 0 80px}
+.m{margin:0 0 24px;background:var(--card);border:1px solid var(--linea);border-radius:18px;
+overflow:hidden;scroll-margin-top:84px}
+.m header{padding:26px 26px 2px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.m h2{font-family:"Bebas Neue",Impact,sans-serif;font-size:46px;line-height:.9;margin:0;
+color:var(--oro)}
+.m .q{color:var(--acero);font-size:12px;letter-spacing:.08em}
+.g{padding:16px 26px 0}
+.g svg{width:100%;height:auto;display:block}
+.cap{padding:18px 26px 26px;color:var(--gris);font-size:14.5px;line-height:1.55;max-width:62em}
+.cap b{color:var(--texto);font-weight:500}
+.cap .ojo{color:var(--rojo)}
+footer{border-top:1px solid var(--linea);padding:34px 0 70px;color:#5c5c5c;font-size:12.5px}
+footer a{color:var(--gris)}
+@media(max-width:620px){.m header{padding:22px 18px 2px}.g{padding:14px 18px 0}
+.cap{padding:16px 18px 22px}.m h2{font-size:38px}}
 </style></head>
 <body>
-
-<header><div class="wrap">
-  <div class="kick">COLÓN DE SANTA FE · PRIMERA NACIONAL 2026</div>
-  <h1>Qué mide cada número</h1>
-  <p>Las estadísticas que usamos en los hilos, explicadas una por una: qué mide,
-     qué no mide, y el caso de esta temporada que la hace evidente.</p>
-</div></header>
-
-<nav><div class="wrap">
-  <a href="#xg">xG</a><a href="#xga">xGA</a><a href="#xgd">xGD</a>
-  <a href="#xgvr">xG vs Real</a><a href="#remates">Remates</a>
-  <a href="#alarco">Al arco</a><a href="#remgol">Remates por gol</a>
-  <a href="#conversion">Conversión</a><a href="#placa">Cómo leer la placa</a>
-  <a href="#limites">Límites</a>
-</div></nav>
-
+<div class="hero"><div class="wrap">
+ <div class="k">COLÓN DE SANTA FE · PRIMERA NACIONAL 2026</div>
+ <h1>Qué mide<br><em>cada número</em></h1>
+ <p>Ocho estadísticas, un gráfico cada una, con los datos reales de la temporada.</p>
+</div></div>
+<nav><div class="wrap"><a href="#xg">xG</a><a href="#xga">xGA</a><a href="#xgd">xGD</a><a href="#vr">xG vs Real</a><a href="#rem">Remates</a><a href="#arco">Al arco</a><a href="#rg">Remates por gol</a><a href="#conv">Conversión</a><a href="#placa">La placa</a><a href="#lim">Los límites</a></div></nav>
 <main><div class="wrap">
-
-<section id="xg">
-  <h2>xG</h2>
-  <p class="sigla">GOLES ESPERADOS · CUÁNTO PELIGRO GENERA</p>
-  <p>Cada remate recibe una nota entre 0 y 1 según las chances que tenía de terminar
-     en gol: desde dónde se pateó, con qué parte del cuerpo, cuánta presión había.
-     Un mano a mano vale mucho; un zapatazo de treinta metros vale poco. El xG de un
-     partido es la suma de esas notas.</p>
-  <p>Sirve para separar <b>jugar bien</b> de <b>tener suerte</b>. Un equipo puede ganar
-     1-0 con un tiro libre y haber generado menos que el rival.</p>
-
-  <div class="cancha">
-   <svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg" role="img"
+<section class="m" id="xg">
+ <header><h2>xG</h2><span class="q">¿CUÁNTO PELIGRO GENERÓ?</span></header>
+ <div class="g"><svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg" role="img"
         aria-label="Cinco remates ubicados en el área, con el tamaño proporcional a su valor de xG">
     <rect x="0" y="0" width="640" height="330" fill="#0b0b0b"/>
     <rect x="8" y="8" width="624" height="314" fill="none" stroke="#242424" stroke-width="2"/>
@@ -153,36 +84,12 @@
           font-size="11" fill="#8C99A8">0.04</text>
     <text x="482" y="200" text-anchor="middle" font-family="DM Mono, monospace"
           font-size="11" fill="#8C99A8">0.02</text>
-   </svg>
-   <div class="leyenda">
-     <span><i></i> mano a mano o remate dentro del área chica</span>
-     <span><i class="chico"></i> zapatazo de treinta metros</span>
-   </div>
-   <div class="suma"><b>1.03</b>
-     <span>El xG del partido es la suma de los cinco. Cinco remates que, en promedio,
-     terminan en un gol.</span></div>
-  </div>
-
-  <div class="no"><b>Lo que no mide:</b> goles. Un equipo puede tener el xG más alto
-     del torneo y no convertir.</div>
-  <div class="caso">
-    <div class="et">EL CASO DE LA TEMPORADA</div>
-    <div class="dato"><span class="num">56</span><span class="eq">de xG acumuló Midland, el máximo de los 36</span></div>
-    <p>Midland generó situaciones por 56 goles en el año y metió 44. Fue el que más
-       peligro creó de las dos zonas y terminó quinto en la suya.</p>
-  </div>
+   </svg></div>
+ <div class="cap">Cada remate vale según las chances que tenía de entrar. Un mano a mano, 0.62; un zapatazo de treinta metros, 0.02. <span class="ojo">No mide goles: mide peligro.</span></div>
 </section>
-
-<section id="xga">
-  <h2>xGA</h2>
-  <p class="sigla">GOLES ESPERADOS EN CONTRA · CUÁNTO PELIGRO CONCEDE</p>
-  <p>El mismo cálculo, pero de las situaciones que te generan a vos. Cuántas claras
-     concedés, antes de que el arquero o el palo digan algo.</p>
-  <p>Separa dos cosas que la tabla mezcla: <b>defender bien</b> es conceder pocas
-     situaciones, y eso no es lo mismo que <b>recibir pocos goles</b>.</p>
-
-  <div class="viz">
-   <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" role="img"
+<section class="m" id="xga">
+ <header><h2>xGA</h2><span class="q">¿CUÁNTO PELIGRO CONCEDIÓ?</span></header>
+ <div class="g"><svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" role="img"
         aria-label="Barras comparando los 42 goles de peligro concedidos por Tristán Suárez contra los 16 que le hicieron">
     <text x="0" y="16" font-family="DM Mono, monospace" font-size="12" fill="#FFC533">TRISTÁN SUÁREZ · TEMPORADA 2026</text>
     <text x="0" y="56" font-family="DM Mono, monospace" font-size="13" fill="#E8E8E8">PELIGRO CONCEDIDO (xGA)</text>
@@ -193,52 +100,36 @@
     <rect x="0" y="138" width="230" height="26" rx="6" fill="#FFC533"/>
     <text x="243" y="157" font-family="Bebas Neue, Impact" font-size="22" fill="#FFC533">16</text>
     <text x="596" y="188" text-anchor="end" font-family="DM Mono, monospace" font-size="12" fill="#8C99A8">26 GOLES AHORRADOS</text>
-   </svg>
-   <div class="pie">Concede como cualquiera y recibe menos que nadie. La diferencia no
-     aparece en la defensa: aparece en el arco. <b>El xGA mide la barra de arriba, no la
-     de abajo.</b></div>
-  </div>
-
-  <div class="no"><b>Lo que no mide:</b> goles recibidos. Y ahí está la confusión más
-     común con este número.</div>
-  <div class="caso">
-    <div class="et">EL CASO DE LA TEMPORADA</div>
-    <div class="dato"><span class="num">42</span><span class="eq">concedió Tristán Suárez · le hicieron 16</span></div>
-    <p>Es el que menos goles recibió del torneo, pero recién 16° en xGA. Concede
-       situaciones como cualquiera: se ahorró 26 goles. Ataja más del 80% de lo que le
-       va al arco, contra un promedio de 75%.</p>
-  </div>
+   </svg></div>
+ <div class="cap">Tristán Suárez es el que menos goles recibió del torneo y recién 16° en xGA: concede como cualquiera. <b>La diferencia no está en la defensa, está en el arco.</b> <span class="ojo">No mide goles recibidos.</span></div>
 </section>
-
-<section id="xgd">
-  <h2>xGD</h2>
-  <p class="sigla">DIFERENCIA DE xG · EL BALANCE DE FONDO</p>
-  <p>El xG menos el xGA. Si da positivo, el equipo genera más peligro del que concede.
-     Es el resumen más honesto de cómo juega un equipo, porque junta las dos puntas y
-     no depende de que la pelota entre.</p>
-  <div class="no"><b>Lo que no mide:</b> puntos. Es lo que el equipo <i>produce</i>,
-     no lo que <i>cobra</i>.</div>
-  <div class="caso">
-    <div class="et">EL CASO DE LA TEMPORADA</div>
-    <div class="dato"><span class="num">+0.40</span><span class="eq">Midland, el mejor de los 36</span></div>
-    <p>Primero de la categoría en rendimiento de fondo, y quinto de su zona en la tabla.
-       Colón terminó con +0.21 y sexto, veinte puntos por encima de Midland.</p>
-  </div>
+<section class="m" id="xgd">
+ <header><h2>xGD</h2><span class="q">¿GENERA MÁS DE LO QUE CONCEDE?</span></header>
+ <div class="g"><svg viewBox="0 0 900 220" role="img" aria-label="Balance de fondo de cuatro equipos y su puesto final en la tabla">
+<text x="0" y="16" font-family="DM Mono,monospace" font-size="12" fill="#FFC533" letter-spacing="1">BALANCE DE FONDO · xG MENOS xGA, POR PARTIDO</text>
+<line x1="0" y1="146" x2="900" y2="146" stroke="#1c1c1c" stroke-width="2"/>
+<rect x="40" y="56" width="150" height="90" rx="6" fill="#C8102E"/>
+<text x="115" y="46" text-anchor="middle" font-family="Bebas Neue,Impact" font-size="34" fill="#fff">+0.40</text>
+<text x="115" y="172" text-anchor="middle" font-family="DM Mono,monospace" font-size="13" fill="#EDEDED">MIDLAND</text>
+<text x="115" y="194" text-anchor="middle" font-family="DM Mono,monospace" font-size="11.5" fill="#6E7A86">1° de 36 · 5° en la tabla</text>
+<rect x="250" y="70" width="150" height="76" rx="6" fill="#3a3a3a"/>
+<text x="325" y="60" text-anchor="middle" font-family="Bebas Neue,Impact" font-size="34" fill="#9AA4AE">+0.34</text>
+<text x="325" y="172" text-anchor="middle" font-family="DM Mono,monospace" font-size="13" fill="#9AA4AE">FERRO</text>
+<text x="325" y="194" text-anchor="middle" font-family="DM Mono,monospace" font-size="11.5" fill="#6E7A86">2° de 36 · 2° en la tabla</text>
+<rect x="460" y="100" width="150" height="46" rx="6" fill="#FFC533"/>
+<text x="535" y="90" text-anchor="middle" font-family="Bebas Neue,Impact" font-size="34" fill="#FFC533">+0.21</text>
+<text x="535" y="172" text-anchor="middle" font-family="DM Mono,monospace" font-size="13" fill="#FFC533">COLÓN</text>
+<text x="535" y="194" text-anchor="middle" font-family="DM Mono,monospace" font-size="11.5" fill="#6E7A86">6° de 36 · 5° en la tabla</text>
+<rect x="670" y="122" width="150" height="24" rx="6" fill="#2a2a2a"/>
+<text x="745" y="112" text-anchor="middle" font-family="Bebas Neue,Impact" font-size="34" fill="#6E7A86">+0.08</text>
+<text x="745" y="172" text-anchor="middle" font-family="DM Mono,monospace" font-size="13" fill="#6E7A86">MADRYN</text>
+<text x="745" y="194" text-anchor="middle" font-family="DM Mono,monospace" font-size="11.5" fill="#6E7A86">13° de 36 · 4° en la tabla</text>
+</svg></div>
+ <div class="cap">Junta las dos puntas y no depende de que la pelota entre. <b>Midland fue el mejor de los 36 y terminó quinto; Madryn fue 13° y terminó cuarto.</b> <span class="ojo">No mide puntos.</span></div>
 </section>
-
-<section id="xgvr">
-  <h2>xG vs Real</h2>
-  <p class="sigla">GOLES MENOS xG, POR PARTIDO · SI COBRA LO QUE GENERA</p>
-  <p>Los goles que hizo menos los que su xG decía que iba a hacer, dividido por los
-     partidos jugados. Positivo: convierte por encima de lo esperable. Negativo:
-     desperdicia.</p>
-  <p>Se calcula <b>por partido</b> y no acumulado, porque el acumulado crece con las
-     fechas y no se puede comparar entre equipos con distinta cantidad de partidos.</p>
-  <div class="no"><b>Cuidado:</b> en esta categoría casi todos terminan por debajo de
-     su xG, así que el puesto importa más que el signo.</div>
-
-  <div class="viz">
-   <svg viewBox="0 0 640 150" xmlns="http://www.w3.org/2000/svg" role="img"
+<section class="m" id="vr">
+ <header><h2>xG vs Real</h2><span class="q">¿COBRA LO QUE GENERA?</span></header>
+ <div class="g"><svg viewBox="0 0 640 150" xmlns="http://www.w3.org/2000/svg" role="img"
         aria-label="Los 36 equipos ordenados según cuánto convierten respecto de su xG, con Colón en el medio">
     <text x="0" y="16" font-family="DM Mono, monospace" font-size="12" fill="#FFC533">LOS 36 EQUIPOS · GOLES MENOS xG, EN TODA LA TEMPORADA</text>
     <line x1="20" y1="86" x2="620" y2="86" stroke="#242424" stroke-width="2"/>
@@ -255,31 +146,12 @@
     <circle cx="600" cy="86" r="6" fill="#8C99A8" opacity=".8"/>
     <text x="600" y="56" text-anchor="middle" font-family="DM Mono, monospace" font-size="11" fill="#8C99A8">MADRYN</text>
     <text x="600" y="74" text-anchor="middle" font-family="Bebas Neue, Impact" font-size="19" fill="#8C99A8">+7</text>
-   </svg>
-   <div class="pie">Casi todos terminan a la izquierda del cero: en esta categoría se
-     convierte menos de lo esperable. <b>Por eso el puesto importa más que el signo.</b></div>
-  </div>
-
-  <div class="scroll"><table>
-    <tr><th>Equipo</th><th class="n">Goles</th><th class="n">xG</th><th class="n">Diferencia</th></tr>
-    <tr><td>Deportivo Madryn</td><td class="n">51</td><td class="n">44.0</td><td class="n">+7</td></tr>
-    <tr class="destaca"><td>Colón</td><td class="n">41</td><td class="n">45.4</td><td class="n">−4</td></tr>
-    <tr><td>Midland</td><td class="n">44</td><td class="n">56.0</td><td class="n">−12</td></tr>
-    <tr><td>All Boys</td><td class="n">20</td><td class="n">45.6</td><td class="n">−26</td></tr>
-  </table></div>
+   </svg></div>
+ <div class="cap">Casi todo el torneo queda a la izquierda del cero: en esta categoría se convierte menos de lo esperable. <b>Por eso importa el puesto, no el signo.</b></div>
 </section>
-
-<section id="remates">
-  <h2>Remates por partido</h2>
-  <p class="sigla">VOLUMEN · CUÁNTAS VECES PATEA</p>
-  <p>Cantidad, sin importar la calidad. Es el número más simple de todos y sirve de
-     control: un equipo con xG alto y pocos remates genera pocas situaciones pero muy
-     buenas; uno con muchos remates y xG bajo patea de cualquier lado.</p>
-  <div class="no"><b>Lo que no mide:</b> peligro. Veinte remates de afuera del área
-     valen menos que cinco desde adentro.</div>
-
-  <div class="viz">
-   <svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" role="img"
+<section class="m" id="rem">
+ <header><h2>Remates</h2><span class="q">¿CUÁNTAS VECES PATEA?</span></header>
+ <div class="g"><svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" role="img"
         aria-label="Remates por partido de Colón en cinco etapas de la temporada: 9, 11.1, 11, 7.2 y 17">
     <text x="0" y="16" font-family="DM Mono, monospace" font-size="12" fill="#FFC533">COLÓN · REMATES POR PARTIDO, POR ETAPA DEL AÑO</text>
     <line x1="0" y1="160" x2="640" y2="160" stroke="#242424" stroke-width="2"/>
@@ -300,60 +172,44 @@
     <text x="554" y="180" text-anchor="middle" font-family="DM Mono, monospace" font-size="11" fill="#FFC533">F32-36</text>
     <text x="432" y="198" text-anchor="middle" font-family="DM Mono, monospace" font-size="10.5" fill="#8C99A8">el bajón</text>
     <text x="554" y="198" text-anchor="middle" font-family="DM Mono, monospace" font-size="10.5" fill="#FFC533">el cierre</text>
-   </svg>
-   <div class="pie">Estable en once durante media temporada, derrumbe a siete en
-     septiembre, y <b>diecisiete en el tramo final.</b> Así se lee una métrica de volumen
-     a lo largo del año.</div>
-  </div>
-
-  <div class="caso">
-    <div class="et">EL CASO DE LA TEMPORADA</div>
-    <div class="dato"><span class="num">12.5</span><span class="eq">Midland, el que más remata</span></div>
-    <p>Colón terminó con 10.2 y puesto 16 de 36. Llegó a estar vigésimo segundo en
-       septiembre, en el peor tramo del año.</p>
-  </div>
+   </svg></div>
+ <div class="cap">Cantidad, sin importar la calidad. <b>Colón se derrumbó a siete en septiembre y terminó en diecisiete.</b></div>
 </section>
-
-<section id="alarco">
-  <h2>Remates al arco</h2>
-  <p class="sigla">PUNTERÍA · CUÁNTOS VAN ADENTRO DE LOS TRES PALOS</p>
-  <p>De todo lo que pateás, cuánto obliga al arquero a intervenir. Separa dos problemas
-     que se confunden: no llegar al arco rival, y llegar y rematar afuera.</p>
-  <div class="no"><b>Lo que no mide:</b> dificultad. Un remate flojo al medio cuenta
-     igual que uno al ángulo.</div>
-  <div class="caso">
-    <div class="et">EL CASO DE COLÓN</div>
-    <div class="dato"><span class="num">4.2</span><span class="eq">por partido · 4° de los 36</span></div>
-    <p>El número más constante del año: Colón estuvo entre los cinco mejores de la
-       categoría desde julio hasta el final, ganando y perdiendo. Cuando patea, patea
-       al arco. El problema fue cuántas veces patea.</p>
-  </div>
+<section class="m" id="arco">
+ <header><h2>Al arco</h2><span class="q">¿CUÁNTOS VAN ENTRE LOS PALOS?</span></header>
+ <div class="g"><svg viewBox="0 0 900 180" role="img" aria-label="De cada diez remates de Colón, cuatro van al arco">
+<text x="0" y="16" font-family="DM Mono,monospace" font-size="12" fill="#FFC533" letter-spacing="1">COLÓN · DE CADA DIEZ REMATES</text>
+<g><circle cx="42" cy="92" r="24" fill="#FFC533"/><circle cx="106" cy="92" r="24" fill="#FFC533"/>
+<circle cx="170" cy="92" r="24" fill="#FFC533"/><circle cx="234" cy="92" r="24" fill="#FFC533"/>
+<circle cx="298" cy="92" r="24" fill="none" stroke="#2a2a2a" stroke-width="3"/>
+<circle cx="362" cy="92" r="24" fill="none" stroke="#2a2a2a" stroke-width="3"/>
+<circle cx="426" cy="92" r="24" fill="none" stroke="#2a2a2a" stroke-width="3"/>
+<circle cx="490" cy="92" r="24" fill="none" stroke="#2a2a2a" stroke-width="3"/>
+<circle cx="554" cy="92" r="24" fill="none" stroke="#2a2a2a" stroke-width="3"/>
+<circle cx="618" cy="92" r="24" fill="none" stroke="#2a2a2a" stroke-width="3"/></g>
+<text x="676" y="86" font-family="Bebas Neue,Impact" font-size="46" fill="#FFC533">4</text>
+<text x="716" y="82" font-family="DM Mono,monospace" font-size="14" fill="#9AA4AE">van al arco · 4° de los 36</text>
+<text x="716" y="106" font-family="DM Mono,monospace" font-size="12.5" fill="#6E7A86">el promedio de la liga es 3,5</text>
+</svg></div>
+ <div class="cap">Separa no llegar al arco rival de llegar y rematar afuera. <b>Fue lo más constante de Colón en todo el año.</b> <span class="ojo">No mide dificultad.</span></div>
 </section>
-
-<section id="remgol">
-  <h2>Remates por gol</h2>
-  <p class="sigla">CUÁNTO CUESTA CADA GOL</p>
-  <p>Los remates totales divididos por los goles. Cuántas veces hay que patear, en
-     promedio, para que entre una. Acá <b>menos es mejor</b>.</p>
-  <div class="no"><b>Cuidado:</b> es el número que más salta de una fecha a otra. Tres
-     goles en un partido de doce remates mejoran de golpe el promedio de toda la
-     temporada.</div>
-  <div class="caso">
-    <div class="et">EL CASO DE COLÓN</div>
-    <div class="dato"><span class="num">8.2</span><span class="eq">remates por gol · 7° de los 36</span></div>
-    <p>El promedio de la categoría es 10.3. Cada gol le costó a Colón dos remates menos
-       que al equipo promedio, todo el año.</p>
-  </div>
+<section class="m" id="rg">
+ <header><h2>Remates por gol</h2><span class="q">¿CUÁNTO CUESTA CADA GOL?</span></header>
+ <div class="g"><svg viewBox="0 0 900 165" role="img" aria-label="A Colón cada gol le cuesta 8.2 remates y al promedio de la liga 10.3">
+<text x="0" y="16" font-family="DM Mono,monospace" font-size="12" fill="#FFC533" letter-spacing="1">REMATES NECESARIOS PARA UN GOL · MENOS ES MEJOR</text>
+<text x="0" y="58" font-family="DM Mono,monospace" font-size="14" fill="#FFC533">COLÓN</text>
+<rect x="120" y="40" width="556" height="26" rx="6" fill="#FFC533"/>
+<text x="690" y="62" font-family="Bebas Neue,Impact" font-size="30" fill="#FFC533">8.2</text>
+<text x="0" y="116" font-family="DM Mono,monospace" font-size="14" fill="#9AA4AE">PROMEDIO</text>
+<rect x="120" y="98" width="698" height="26" rx="6" fill="#2e2e2e"/>
+<text x="832" y="120" font-family="Bebas Neue,Impact" font-size="30" fill="#9AA4AE">10.3</text>
+<text x="120" y="156" font-family="DM Mono,monospace" font-size="12" fill="#6E7A86">dos remates menos por cada gol, todo el año</text>
+</svg></div>
+ <div class="cap">Conversión dado vuelta. <span class="ojo">Es el número que más salta de una fecha a otra:</span> tres goles en un partido de doce remates mejoran de golpe el promedio del año.</div>
 </section>
-
-<section id="conversion">
-  <h2>Conversión</h2>
-  <p class="sigla">QUÉ PORCENTAJE DE LOS REMATES TERMINA EN GOL</p>
-  <p>Lo mismo que el anterior, dado vuelta y en porcentaje. Es la métrica que mejor
-     explica la temporada de Colón.</p>
-
-  <div class="viz">
-   <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" role="img"
+<section class="m" id="conv">
+ <header><h2>Conversión</h2><span class="q">¿QUÉ PARTE TERMINA EN GOL?</span></header>
+ <div class="g"><svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" role="img"
         aria-label="Con 337 remates Colón hizo 41 goles; con la conversión promedio de la liga habría hecho 33">
     <text x="0" y="16" font-family="DM Mono, monospace" font-size="12" fill="#FFC533">COLÓN · 337 REMATES EN LA TEMPORADA</text>
     <text x="0" y="56" font-family="DM Mono, monospace" font-size="13" fill="#E8E8E8">GOLES QUE HIZO · 12,2%</text>
@@ -366,66 +222,62 @@
     <text x="474" y="164" text-anchor="end" font-family="Bebas Neue, Impact" font-size="24" fill="#A9B4BE">33</text>
     <rect x="486" y="142" width="118" height="30" rx="6" fill="none" stroke="#FFC533" stroke-width="2" stroke-dasharray="4 3"/>
     <text x="545" y="164" text-anchor="middle" font-family="Bebas Neue, Impact" font-size="22" fill="#FFC533">+8</text>
-   </svg>
-   <div class="pie">Los mismos 337 remates. La diferencia son <b>ocho goles que no salen
-     de llegar más, salen de embocarla mejor.</b></div>
-  </div>
-
-  <div class="caso">
-    <div class="et">LA CUENTA DEL AÑO DE COLÓN</div>
-    <div class="dato"><span class="num">8</span><span class="eq">goles de ventaja por embocarla mejor</span></div>
-    <p>Colón remató 337 veces y metió 41 goles: un 12,2% contra un 9,7% de promedio de
-       la categoría. Con la eficacia del equipo promedio, con esos mismos remates
-       habría hecho 33. Ocho goles que no salen de llegar más, salen de embocarla
-       mejor. Y son, redondeando, la diferencia entre entrar al Reducido o mirarlo
-       desde afuera.</p>
-  </div>
+   </svg></div>
+ <div class="cap"><b>Ocho goles que no salen de llegar más: salen de embocarla mejor.</b> Son, redondeando, la diferencia entre entrar al Reducido o mirarlo desde afuera.</div>
 </section>
-
-<section id="placa">
-  <h2>Cómo leer la placa</h2>
-  <p class="sigla">LAS CINCO ZONAS DE CADA GRÁFICA</p>
-  <p><b>Arriba a la izquierda</b> va el nombre de la métrica y, al lado, el número de
-     Colón en grande. Ese es el dato principal.</p>
-  <p><b>Debajo</b>, una línea con la comparación contra la fecha anterior: cuánto se
-     movió y entre qué puestos.</p>
-  <p><b>La barra</b> ubica a Colón entre el peor y el mejor de la categoría, con el
-     promedio marcado. Sirve para ver de un vistazo si está cerca de un extremo o en
-     el montón.</p>
-  <p><b>El top 5</b> lista a los mejores del torneo en esa métrica. El número entre
-     paréntesis <b>no</b> es el puesto en la métrica: es la posición de ese equipo en
-     la tabla de puntos de su zona. Si Colón queda afuera del top 5, aparece igual en
-     la sexta fila con su puesto real.</p>
-  <p><b>El panel rojo</b> repite el puesto de Colón entre los 36 y el promedio de la
-     liga, para no tener que buscarlos en la barra.</p>
+<section class="m" id="placa">
+ <header><h2>La placa</h2><span class="q">CÓMO SE LEE CADA GRÁFICA</span></header>
+ <div class="g"><svg viewBox="0 0 900 320" role="img" aria-label="Esquema de una placa del hilo con sus cinco zonas numeradas">
+<rect width="900" height="320" rx="10" fill="#050505" stroke="#1c1c1c"/>
+<rect x="620" y="0" width="280" height="320" rx="10" fill="#C8102E"/>
+<rect x="612" y="0" width="8" height="320" fill="#FFC533"/>
+<text x="28" y="50" font-family="Bebas Neue,Impact" font-size="32" fill="#FFC533">CONVERSIÓN</text>
+<text x="28" y="72" font-family="DM Mono,monospace" font-size="11" fill="#6E7A86">POR REMATE</text>
+<text x="300" y="70" font-family="Bebas Neue,Impact" font-size="58" fill="#fff">12.2%</text>
+<text x="28" y="120" font-family="DM Mono,monospace" font-size="11.5" fill="#6E7A86">vs F35 · DE #6 A #7</text>
+<rect x="28" y="146" width="556" height="10" rx="5" fill="#1c1c1c"/>
+<rect x="28" y="146" width="396" height="10" rx="5" fill="#C8102E"/>
+<circle cx="424" cy="151" r="9" fill="#FFC533"/>
+<text x="28" y="182" font-family="DM Mono,monospace" font-size="11" fill="#6E7A86">PEOR · PROM · MEJOR</text>
+<text x="28" y="218" font-family="DM Mono,monospace" font-size="11.5" fill="#FFC533">TOP 5 DE LA CATEGORÍA</text>
+<text x="28" y="246" font-family="DM Mono,monospace" font-size="12.5" fill="#EDEDED">1. MADRYN     14.8%  #4 (ZA)</text>
+<text x="28" y="272" font-family="DM Mono,monospace" font-size="12.5" fill="#EDEDED">2. MORÓN      14.1%  #3 (ZA)</text>
+<text x="28" y="298" font-family="DM Mono,monospace" font-size="12.5" fill="#FFC533">7. COLÓN      12.2%  #5 (ZA)</text>
+<text x="652" y="50" font-family="DM Mono,monospace" font-size="11.5" fill="#FFC533">PUESTO</text>
+<text x="760" y="142" text-anchor="middle" font-family="Bebas Neue,Impact" font-size="82" fill="#FFC533">#7</text>
+<text x="652" y="180" font-family="DM Mono,monospace" font-size="11.5" fill="#FFC533">DE 36 EQUIPOS</text>
+<text x="652" y="232" font-family="DM Mono,monospace" font-size="11.5" fill="#FFC533">PROMEDIO LIGA</text>
+<text x="652" y="268" font-family="Bebas Neue,Impact" font-size="32" fill="#FFC533">9.7%</text>
+<g font-family="DM Mono,monospace" font-size="12" font-weight="500">
+<circle cx="282" cy="52" r="13" fill="#FFC533"/><text x="282" y="57" text-anchor="middle" fill="#070707">1</text>
+<circle cx="206" cy="116" r="13" fill="#FFC533"/><text x="206" y="121" text-anchor="middle" fill="#070707">2</text>
+<circle cx="600" cy="151" r="13" fill="#FFC533"/><text x="600" y="156" text-anchor="middle" fill="#070707">3</text>
+<circle cx="420" cy="298" r="13" fill="#FFC533"/><text x="420" y="303" text-anchor="middle" fill="#070707">4</text>
+<circle cx="866" cy="142" r="13" fill="#070707"/><text x="866" y="147" text-anchor="middle" fill="#FFC533">5</text></g>
+</svg></div>
+ <div class="cap"><b>1</b> el número de Colón · <b>2</b> cuánto se movió · <b>3</b> dónde cae entre el peor y el mejor · <b>4</b> el top 5, con Colón en la sexta fila si quedó afuera · <b>5</b> su puesto y el promedio.<br><br><span class="ojo">El número entre paréntesis del top 5 no es el ranking de la métrica:</span> es la posición de ese equipo en la tabla de su zona.</div>
 </section>
-
-<section id="limites">
-  <h2>Los límites</h2>
-  <p class="sigla">LO QUE ESTOS NÚMEROS NO PUEDEN HACER</p>
-  <p><b>No predicen.</b> Probamos un modelo con la fuerza de ataque y defensa de los 36
-     equipos contra 267 partidos que no había visto, y empata con aplicarle a todos la
-     misma cuenta sin mirar quién juega. Hasta las casas de apuestas le ganan a eso por
-     apenas un 1%. En esta categoría las diferencias entre equipos son chicas frente al
-     azar.</p>
-  <p><b>El xG de nuestra fuente viene inflado</b> alrededor de un 35% para esta liga. Si
-     el sesgo es parejo para los 36, el ranking no se mueve, pero el valor absoluto está
-     alto. Por eso miramos puestos más que números sueltos.</p>
-  <p><b>Y hay partidos sin datos.</b> Las fechas 4, 17, 29, 33, 34 y 36 llegaron con el
-     evento corrupto: remates al arco en negativo, o goles sin remates registrados. Se
-     descartan de los promedios, siempre con la misma regla y para los 36 equipos por
-     igual. Los goles, en cambio, salen siempre de la tabla oficial.</p>
-  <p style="margin-top:22px">El código, los datos y estas reglas están abiertos en
-     <a class="ext" href="https://github.com/marianodimaggio/colon-stats">el repositorio</a>. Y el cuadro del
-     Reducido, con el reglamento de AFA cargado, en
-     <a class="ext" href="https://llave-reducido.netlify.app/">llave-reducido.netlify.app</a>.</p>
+<section class="m" id="lim">
+ <header><h2>Los límites</h2><span class="q">LO QUE NO PUEDEN HACER</span></header>
+ <div class="g"><svg viewBox="0 0 900 170" role="img" aria-label="El modelo empata con no usar ningun dato y las casas de apuestas le ganan por poco">
+<text x="0" y="16" font-family="DM Mono,monospace" font-size="12" fill="#FFC533" letter-spacing="1">ERROR AL ANTICIPAR 267 PARTIDOS · MÁS BAJO ES MEJOR</text>
+<text x="0" y="58" font-family="DM Mono,monospace" font-size="13" fill="#EDEDED">LAS CASAS DE APUESTAS</text>
+<rect x="330" y="40" width="500" height="24" rx="5" fill="#FFC533"/>
+<text x="842" y="60" font-family="Bebas Neue,Impact" font-size="25" fill="#FFC533">1.0138</text>
+<text x="0" y="108" font-family="DM Mono,monospace" font-size="13" fill="#9AA4AE">NO SABER NADA DE NADIE</text>
+<rect x="330" y="90" width="522" height="24" rx="5" fill="#3a3a3a"/>
+<text x="842" y="110" font-family="Bebas Neue,Impact" font-size="25" fill="#9AA4AE">1.0244</text>
+<text x="0" y="158" font-family="DM Mono,monospace" font-size="13" fill="#9AA4AE">NUESTRO MODELO</text>
+<rect x="330" y="140" width="523" height="24" rx="5" fill="#3a3a3a"/>
+<text x="842" y="160" font-family="Bebas Neue,Impact" font-size="25" fill="#9AA4AE">1.0246</text>
+</svg></div>
+ <div class="cap"><b>Describen, no predicen.</b> Un modelo con la fuerza de los 36 equipos empata con aplicarle a todos la misma cuenta sin mirar quién juega. Y el xG de la fuente viene inflado un 35% en esta liga: miramos puestos antes que números sueltos.</div>
 </section>
-
 </div></main>
-
 <footer><div class="wrap">
-  Datos: FootyStats y Promiedos · temporada 2026, 36 fechas.<br>
-  Hilos de estadísticas de Colón en <a href="https://x.com/MarianoDiMaggio">@MarianoDiMaggio</a>.
+ Datos: FootyStats y Promiedos · Primera Nacional 2026, 36 fechas.<br>
+ Hilos en <a href="https://x.com/MarianoDiMaggio">@MarianoDiMaggio</a> ·
+ código en <a href="https://github.com/marianodimaggio/colon-stats">GitHub</a> ·
+ el cuadro del Reducido en <a href="https://llave-reducido.netlify.app/">llave-reducido</a>.
 </div></footer>
-
 </body></html>
