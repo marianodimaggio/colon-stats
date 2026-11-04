@@ -1,0 +1,62 @@
+[
+  {
+    "img": "colon_f31_portada",
+    "titulo": "PORTADA · APERTURA DEL HILO",
+    "tuit": "Después de 31 fechas, lo que le pasa a Colón se explica con una sola cuenta.\n\nEl equipo remató 303 veces en todo el año y metió 38 goles. Si hubiera convertido como el equipo promedio de la categoría, con esos mismos 303 remates habría metido 29. Nueve goles de diferencia, y no salen de llegar más: salen de embocarla mejor.\n\nEl problema es que en las últimas cinco fechas pasó de once remates por partido a siete. Está quinto apoyado en lo único que no se puede sostener a voluntad, justo cuando lo demás se cae.\n\nFecha 31, en orden. Hilo 🧵\n\n#Colon #PrimeraNacional #Estadisticas"
+  },
+  {
+    "img": "f31_xG",
+    "titulo": "1 · xG GENERADO",
+    "tuit": "El partido más pobre del año generando peligro, y por bastante: menos de la mitad de lo que Colón produce habitualmente.\n\nEl promedio de la temporada bajó y perdimos un puesto. Es la segunda vez en tres fechas que este número cede, algo que no pasaba desde julio.\n\n#Colon #Estadisticas"
+  },
+  {
+    "img": "f31_xGA",
+    "titulo": "2 · xGA RECIBIDO",
+    "tuit": "Atrás el promedio del año subió otra vez y perdimos dos puestos. En Floresta concedimos bastante más de lo que generamos.\n\nPero el arco quedó en cero por segunda fecha seguida, y ahí está el punto. Hoy el fondo es lo que le da puntos a este equipo, no el ataque. Hace cinco fechas era al revés.\n\n#Colon #PrimeraNacional"
+  },
+  {
+    "img": "f31_xGD",
+    "titulo": "3 · xGD · DIFERENCIA",
+    "tuit": "El balance de fondo cayó a su nivel más bajo desde que empezó el ciclo de Delfino.\n\nY el problema tiene una dirección clara: de local Colón sigue produciendo mucho más de lo que concede, pero de visitante el balance ya es negativo en el acumulado del año.\n\n#Colon #Estadisticas"
+  },
+  {
+    "img": "f31_xgvr",
+    "titulo": "4 · xG vs REAL",
+    "tuit": "Este número mide cuánto convierte Colón por encima o por debajo de sus chances, y lleva meses siendo el mejor amigo de la campaña.\n\nEstamos en el tercio de arriba de la categoría. Dicho de otro modo: el equipo viene cobrando casi todo lo que genera, y eso es exactamente lo que no se puede dar por descontado de acá en adelante.\n\n#Colon #PrimeraNacional #Estadisticas"
+  },
+  {
+    "img": "f31_rem_pj",
+    "titulo": "5 · REMATES POR PARTIDO",
+    "tuit": "Dos remates. El promedio del año cayó al puesto 22 de la categoría, el peor registro de toda la temporada.\n\nHace un mes marcábamos este número como el punto débil que las victorias tapaban. Ya van seis fechas cayendo y ahora está a la vista de cualquiera.\n\n#Colon #Estadisticas"
+  },
+  {
+    "img": "f31_tramos",
+    "titulo": "5 BIS · EL VOLUMEN POR TRAMOS",
+    "tuit": "Y acá se ve de golpe lo que viene pasando. Partimos la temporada en cuatro etapas y miramos cuánto remató el equipo en cada una.\n\nEntre la fecha 11 y la 26 Colón estuvo estable en once remates por partido. En las últimas cinco cayó a siete. Un tercio menos, de un tramo al otro.\n\nNo es una curva que baja despacio: es un escalón. Y coincide exactamente con el momento en que el equipo empezó a depender de que la metiera Lago.\n\n#Colon #Estadisticas"
+  },
+  {
+    "img": "f31_sot_pj",
+    "titulo": "6 · REMATES AL ARCO",
+    "tuit": "Sigue siendo lo más firme que tiene el equipo: quintos del torneo, y el promedio bajó apenas pese al partido de Floresta.\n\nDe los dos remates, uno fue al arco. Puntería no es el problema. Volumen sí.\n\n#Colon #Sabalero #Estadisticas"
+  },
+  {
+    "img": "f31_rem_gol",
+    "titulo": "7 · REMATES POR GOL",
+    "tuit": "Cuartos de la categoría: cada gol le cuesta a Colón casi tres remates menos que al equipo promedio.\n\nY acá está, en un solo número, por qué el equipo está quinto. No llega más que los demás, la emboca mejor que los demás. Toda la campaña se apoya en esto, que es justo lo que más cambia de una fecha a otra.\n\n#Colon #PrimeraNacional"
+  },
+  {
+    "img": "f31_conv",
+    "titulo": "8 · CONVERSIÓN",
+    "tuit": "Prácticamente igual, y bien arriba del promedio de la categoría por séptima fecha consecutiva.\n\nEsta es la razón por la que Colón está quinto con un rendimiento de fondo de mitad de tabla. Define mejor que casi todos, y eso le viene alcanzando.\n\n#Colon #Estadisticas"
+  },
+  {
+    "img": "f31_top_jugadores",
+    "titulo": "9 · xG INDIVIDUAL · LAGO",
+    "tuit": "Nacho bajó al quinto puesto del torneo, aunque con trece goles sigue siendo el que más convirtió del top 5 junto a Fagundez.\n\nDos aclaraciones de siempre: los goles los tomamos de prensa, porque FootyStats le acredita uno menos desde julio. Y el xG individual de esta plataforma se reescribe entre exportaciones: esta semana le bajó casi un gol esperado sin que jugara. Por eso el puesto es orientativo.\n\n#Colon #Sabalero #Estadisticas"
+  },
+  {
+    "img": "f31_proximo_rival",
+    "titulo": "10 · PRÓXIMO RIVAL · ESTUDIANTES",
+    "tuit": "Sábado en el Brigadier López contra el séptimo, que está cuatro puntos atrás y viene a buscar el Reducido.\n\nAcá los números están claramente de nuestro lado: de local Colón es uno de los mejores de la zona y Estudiantes de visitante genera poco. Es el escenario donde este equipo se siente cómodo.\n\nQuedan cinco fechas y estamos a un punto del cuarto puesto. Este es de los que hay que ganar.\n\n¿Llegamos al Reducido metidos en los primeros cuatro o hay que resignarse a entrar más abajo?\n\n#Colon #PrimeraNacional #Sabalero"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "img": "var_f28_portada",
+    "titulo": "PORTADA · APERTURA DEL HILO",
+    "tuit": "Colón produce casi lo mismo todas las semanas y sin embargo gana tres al hilo y después pierde dos. Parece un equipo impredecible.\n\nFuimos a medirlo y encontramos algo mejor: en esta categoría casi nadie es predecible, y eso cambia por completo cómo hay que mirar el Reducido.\n\nAviso: este hilo es más denso que los de cada fecha. Son cuatro datos que se apoyan uno en otro, así que pide leerlo seguido y con ganas.\n\n#Colon #PrimeraNacional #Estadisticas"
+  },
+  {
+    "img": "var_f28_xg_cv",
+    "titulo": "1 · EL MÁS PAREJO DE LOS 36",
+    "tuit": "Arranquemos por lo que sí es cierto: no hay equipo en la categoría que genere tan parecido de un partido a otro como Colón. Es el primero de los 36 en eso.\n\nJuegue con el líder o con el último, de local o de visitante, produce casi la misma cantidad de peligro.\n\n#Colon #Estadisticas"
+  },
+  {
+    "img": "var_f28_pts_sd",
+    "titulo": "2 · PERO LOS RESULTADOS NO ACOMPAÑAN",
+    "tuit": "Uno esperaría entonces que sus resultados fueran raros. Genera siempre igual pero gana de a rachas y pierde de a rachas.\n\nY no: en cuánto oscilan sus resultados, Colón está en la mitad exacta de la tabla. Ni más ni menos errático que el resto. No es que Colón sea raro. Es que en esta categoría todos los equipos ganan y pierden así.\n\n#Colon #PrimeraNacional"
+  },
+  {
+    "img": "var_f28_impredecible",
+    "titulo": "3 · POR QUÉ NO SE PUEDE ANTICIPAR",
+    "tuit": "Acá está el dato que más me sorprendió de todo el año.\n\nArmamos un modelo con la fuerza de ataque y defensa de los 36 equipos. Después probamos qué pasa si uno ignora todo eso y le aplica a cada partido las tasas de la placa, sin mirar quién juega.\n\nAnticipa igual de bien. Las diferencias entre los equipos de esta categoría son chicas frente al azar.\n\n#Colon #Estadisticas"
+  },
+  {
+    "img": "var_f28_arriba",
+    "titulo": "4 · ENTONCES LO QUE DECIDE ES DÓNDE ENTRÁS",
+    "tuit": "Si el juego casi no se puede anticipar, algo tiene que decidir el Reducido. Y es esto: en la primera fase, el mejor ubicado gana su llave cerca del 80% de las veces.\n\nNo por ser mejor equipo. Por jugar de local y porque le alcanza el empate para pasar.\n\nSimulando el torneo diez mil veces, Colón asciende en 13 de cada 100 y Ferro en 46. La diferencia es de puntos y de fechas que faltan, no de juego.\n\n#Colon #PrimeraNacional #Sabalero"
+  },
+  {
+    "img": "var_f28_arriba",
+    "titulo": "5 · CIERRE",
+    "tuit": "Dos cosas para llevarse.\n\nLas ocho fechas que quedan no se juegan para entrar al Reducido: se juegan para entrar arriba. El puesto es lo que te da la localía y la ventaja en la llave, y eso pesa más que el juego.\n\nY la incómoda: en un mata-mata la varianza es amiga del más débil, porque el que está abajo necesita el partido raro. Colón es el equipo que menos partidos raros juega de la categoría.\n\nEl cuadro completo, con el reglamento cargado, está acá: llave-reducido.netlify.app\n\n¿Preferís este Colón parejo, o uno más irregular con más techo?\n\n#Colon #PrimeraNacional #Sabalero"
+  }
+]

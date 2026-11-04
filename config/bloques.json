@@ -1,0 +1,63 @@
+{
+ "_nota": "Especificacion fija de la serie de Primera Nacional (diseno F20+). NO reordenar ni agregar bloques sin que Mariano lo pida. El orden del hilo es: portada -> los 8 bloques en este orden -> xG individual -> proximo rival (siempre ultimo).",
+ "_recordatorios": [
+  "xG vs Real es SIEMPRE por partido: (goles reales - xG acumulado) / PJ. Nunca acumulado.",
+  "La fecha 4 (Chaco For Ever 1-0 Colon, jugada el 20/06) viene sin datos de evento en FootyStats (0 remates, xG 0.10/0.17). Se INCLUYE igual: incluirla reproduce exacto el xG 1.32 / xGA 1.15 / xGD +0.18 publicado en F20.",
+  "Los remates al arco SI vienen usables en el export de Primera Nacional (shots_on_target).",
+  "Los goles de Lago se toman de prensa, no del CSV: FootyStats le reasigno un gol.",
+  "Filtrar SIEMPRE con igualdad exacta == 'Colon' (con tilde). 'Col' in nombre captura Colegiales.",
+  "xG por jugador se lee de xg_total_overall, no de la columna xG (devuelve ceros).",
+  "Universo de jugadores elegibles = los que tienen xg_total_overall > 0 (577 en F22).",
+  "La posicion entre parentesis del top 5 es la posicion en la TABLA DE PUNTOS de esa zona, nunca el ranking de la metrica.",
+  "Todos los tuits cierran con 'Sigue abajo 👇' antes de los hashtags, menos el ultimo."
+ ],
+ "validacion_f20": {
+  "xG": [1.32, 12], "xGA": [1.15, 8], "xGD": [0.18, 8], "xgvr": [0.03, 4],
+  "rem_pj": [10.05, 20], "sot_pj": [3.95, 6], "rem_gol": [7.44, 2], "conv": [13.4, 2],
+  "_uso": "Recalcular estos valores filtrando el export hasta la fecha 20. Si no coinciden, el calculo esta mal antes de imprimir nada."
+ },
+ "bloques": [
+  {"key":"xG","orden":1,"label_lines":["xG"],"sub_lines":["POR PARTIDO","GENERADO"],
+   "menor_es_mejor":false,"signed":false,"is_pct":false,"decimales":2,
+   "top5_title":"TOP 5 xG DEL TORNEO","unidad_panel":"xG"},
+
+  {"key":"xGA","orden":2,"label_lines":["xGA"],"sub_lines":["POR PARTIDO","RECIBIDO"],
+   "menor_es_mejor":true,"signed":false,"is_pct":false,"decimales":2,
+   "top5_title":"TOP 5 MENOS xGA CONCEDE","unidad_panel":"xGA"},
+
+  {"key":"xGD","orden":3,"label_lines":["xGD"],"sub_lines":["DIFERENCIA","POR PARTIDO"],
+   "menor_es_mejor":false,"signed":true,"is_pct":false,"decimales":2,
+   "top5_title":"TOP 5 xGD DEL TORNEO","unidad_panel":"xGD"},
+
+  {"key":"xgvr","orden":4,"label_lines":["xG vs","REAL"],"sub_lines":["+ CONVERTIMOS","MÁS QUE EL xG"],
+   "menor_es_mejor":false,"signed":true,"is_pct":false,"decimales":2,
+   "top5_title":"TOP 5 xG vs REAL","unidad_panel":"GOLES",
+   "_formula":"(GF - suma_xG) / PJ"},
+
+  {"key":"rem_pj","orden":5,"label_lines":["REMATES"],"sub_lines":["POR PARTIDO","TOTALES"],
+   "menor_es_mejor":false,"signed":false,"is_pct":false,"decimales":2,
+   "top5_title":"TOP 5 REMATES POR PARTIDO","unidad_panel":"REM"},
+
+  {"key":"sot_pj","orden":6,"label_lines":["REMATES","AL ARCO"],"sub_lines":["POR PARTIDO","A PUERTA"],
+   "menor_es_mejor":false,"signed":false,"is_pct":false,"decimales":2,
+   "top5_title":"TOP 5 REMATES AL ARCO","unidad_panel":"REM"},
+
+  {"key":"rem_gol","orden":7,"label_lines":["REMATES","POR GOL"],"sub_lines":["CUÁNTO CUESTA","CADA GOL"],
+   "menor_es_mejor":true,"signed":false,"is_pct":false,"decimales":2,
+   "top5_title":"TOP 5 MENOS REMATES POR GOL","unidad_panel":"REM"},
+
+  {"key":"conv","orden":8,"label_lines":["CONVER-","SIÓN"],"sub_lines":["GOLES SOBRE","REMATES"],
+   "menor_es_mejor":false,"signed":false,"is_pct":true,"decimales":1,
+   "top5_title":"TOP 5 CONVERSIÓN","unidad_panel":""}
+ ],
+ "cierre": [
+  {"key":"top_jugadores","orden":9,"funcion":"build_top_jugadores"},
+  {"key":"proximo_rival","orden":10,"funcion":"build_proximo_rival","_nota":"SIEMPRE el ultimo del hilo"}
+ ],
+ "autofit": {
+  "label_sizes":[58,52,46,42],
+  "val_sizes":[190,175,160,148,136],
+  "margen_antes_del_panel_rojo":42,
+  "_nota":"Probar de mayor a menor y quedarse con el primer par que entre. Sin esto los labels de 2 renglones empujan el numero grande contra el panel rojo."
+ }
+}

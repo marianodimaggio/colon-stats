@@ -1,0 +1,54 @@
+{
+ "_nota": "Hilo de IDENTIDAD DE JUEGO, con datos de SICS.tv. Es un hilo aparte: NO reemplaza ni modifica el hilo de la fecha, que sigue siendo 100% FootyStats. Orden fijo: el argumento va de la solidez sin contacto al diagnostico incomodo.",
+ "_avisos": [
+  "SICS solo da totales de temporada, asi que estos bloques NO tienen delta contra la fecha anterior. La fila del delta se usa para el total crudo.",
+  "SICS no da desglose por localia, asi que local_val va en None y la columna LOC/VIS se omite.",
+  "En castellano rioplatense: gambeta, no drible.",
+  "El % de atajadas mezcla fuentes: salvadas de SICS y goles concedidos de FootyStats. Aclararlo en el copy.",
+  "Normalizar SIEMPRE por 'Tiempo de juego' / 90 y no por partidos: a varios equipos les faltan fechas en SICS.",
+  "Definir la direccion de cada metrica (menor_es_mejor). Rankear todo de mayor a menor produce puestos invertidos: gambetas sufridas quedaria 36 cuando es 1."
+ ],
+ "fuente_txt": "Fuente: SICS.tv · Team.Studio",
+ "bloques": [
+  {"key":"gambetas_sufridas","orden":1,"col":"Drible sufrido",
+   "label_lines":["GAMBETAS","EN CONTRA"],"sub_lines":["QUE NOS HACEN","EN 90 MINUTOS"],
+   "menor_es_mejor":true,"decimales":2,"unidad_panel":"GAMB",
+   "top5_title":"TOP 5 MENOS GAMBETAS EN CONTRA"},
+
+  {"key":"faltas","orden":2,"col":"Faltas",
+   "label_lines":["FALTAS"],"sub_lines":["QUE COMETEMOS","EN 90 MINUTOS"],
+   "menor_es_mejor":true,"decimales":2,"unidad_panel":"FALTAS",
+   "top5_title":"TOP 5 MENOS FALTAS COMETE"},
+
+  {"key":"recup_ataque","orden":3,"col":"Recuperaciones de balón en ataque",
+   "label_lines":["RECUPERA-","CIONES"],"sub_lines":["EN CAMPO RIVAL","CADA 90 MINUTOS"],
+   "menor_es_mejor":false,"decimales":2,"unidad_panel":"REC",
+   "top5_title":"TOP 5 RECUPERA EN CAMPO RIVAL"},
+
+  {"key":"gambetas_logradas","orden":4,"col":"Drible exitoso",
+   "label_lines":["GAMBETAS","LOGRADAS"],"sub_lines":["QUE HACEMOS","EN 90 MINUTOS"],
+   "menor_es_mejor":false,"decimales":2,"unidad_panel":"GAMB",
+   "top5_title":"TOP 5 GAMBETAS LOGRADAS"},
+
+  {"key":"centros","orden":5,"col":"Centros",
+   "label_lines":["CENTROS"],"sub_lines":["AL ÁREA RIVAL","EN 90 MINUTOS"],
+   "menor_es_mejor":false,"decimales":2,"unidad_panel":"CENT",
+   "top5_title":"TOP 5 CENTROS POR 90"},
+
+  {"key":"pases_area","orden":6,"col":"Pases en el área",
+   "label_lines":["PASES","AL ÁREA"],"sub_lines":["DEL RIVAL","EN 90 MINUTOS"],
+   "menor_es_mejor":false,"decimales":2,"unidad_panel":"PASES",
+   "top5_title":"TOP 5 PASES AL ÁREA"},
+
+  {"key":"claves_x_area","orden":7,"derivada":"Pases claves / Pases en el área * 100",
+   "label_lines":["PASES","CLAVES"],"sub_lines":["POR CADA 100","PELOTAS AL ÁREA"],
+   "menor_es_mejor":false,"decimales":1,"is_pct":true,"unidad_panel":"",
+   "top5_title":"TOP 5 PASES CLAVES POR 100 AL ÁREA"},
+
+  {"key":"pct_atajadas","orden":8,"derivada":"Salvadas / (Salvadas + goles concedidos) * 100",
+   "label_lines":["ATAJADAS"],"sub_lines":["DE LO QUE LLEGA","AL ARCO PROPIO"],
+   "menor_es_mejor":false,"decimales":1,"is_pct":true,"unidad_panel":"",
+   "top5_title":"TOP 5 % DE ATAJADAS",
+   "_fuente_mixta":"salvadas SICS + goles concedidos FootyStats"}
+ ]
+}

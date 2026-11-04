@@ -1,0 +1,110 @@
+{
+ "meta": {
+  "titulo": "",
+  "kicker": "",
+  "subtitulo": "",
+  "fuentes": "",
+  "notas": ""
+ },
+ "portada": {
+  "pj": 0,
+  "pts": 0,
+  "posicion": "",
+  "zona": "A",
+  "items": [
+   "",
+   "",
+   "",
+   "",
+   ""
+  ]
+ },
+ "jugadores": {
+  "nombre": "Ignacio Lago",
+  "xg": 7.61,
+  "goles": "16",
+  "pj": "33",
+  "minutos": "2811",
+  "puesto": "4",
+  "universo": "695",
+  "ambito": "DEL TORNEO",
+  "sub_hero": [
+   "xG ACUMULADO",
+   "EN EL TORNEO"
+  ],
+  "top5": [
+   [
+    "MACHADO",
+    "CA Mitre",
+    "9.66",
+    "12g"
+   ],
+   [
+    "FAGUNDEZ",
+    "Morón",
+    "8.97",
+    "15g"
+   ],
+   [
+    "GORDILLO",
+    "Gimnasia y Tiro",
+    "8.38",
+    "13g"
+   ],
+   [
+    "LAGO",
+    "Colón",
+    "7.61",
+    "16g"
+   ],
+   [
+    "SILBA",
+    "Dep. Madryn",
+    "7.31",
+    "16g"
+   ]
+  ]
+ },
+ "rival": {
+  "fecha": 1,
+  "nombre": "Midland",
+  "ciudad": "Santa Fe",
+  "zona": "ZB",
+  "puntos": "55",
+  "rival_pj": "18",
+  "rival_wdl": "3-7-8",
+  "rival_xg": "1.27",
+  "rival_xga": "1.19",
+  "colon_pj": "16",
+  "colon_wdl": "10-4-2",
+  "colon_xg": "1.57",
+  "colon_xga": "1.01",
+  "diferencia": "COLÓN +5",
+  "goleador_rival": "D. BULACIO · 8g",
+  "goleador_colon": "I. LAGO · 16g",
+  "colon_es_local": true,
+  "header": "REDUCIDO 2026 · PRIMERA FASE",
+  "pie": "SÁB 14/11 · BRIGADIER LÓPEZ"
+ },
+ "tuits": [
+  {
+   "img": "colon_fNN_portada",
+   "titulo": "PORTADA · APERTURA DEL HILO",
+   "tuit": ""
+  }
+ ],
+ "_como_usar": [
+  "1. Copiar este archivo a fNN.json con el numero de la fecha.",
+  "2. Correr: python3 fecha.py NN --matches ... --players ... --tabla ... --solo-calculo",
+  "3. Mirar los ocho numeros y sus puestos, y recien ahi escribir los tuits.",
+  "4. Completar portada, jugadores, rival y tuits aca.",
+  "5. Correr el mismo comando sin --solo-calculo.",
+  "rival.colon_es_local: true cuando Colon recibe. Con true se pasan los numeros del rival",
+  "  COMO VISITANTE y los de Colon COMO LOCAL.",
+  "jugadores.colon_row y colon_rank: solo si el jugador de Colon quedo FUERA del top 5.",
+  "jugadores.goles: va el de PRENSA, no el del CSV (FootyStats le acredita uno menos a Lago).",
+  "caratula y tramos son OPCIONALES: dejar en null si la fecha no las lleva."
+ ],
+ "caratula": null,
+ "tramos": null
+}

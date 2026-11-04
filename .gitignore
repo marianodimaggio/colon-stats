@@ -1,0 +1,18 @@
+# datos de entrada: se bajan de FootyStats cada fecha, no van al repo
+datos/
+*.csv
+!config/**/*.csv
+
+# salida generada: se puede regenerar con fecha.py
+salida/
+*.jpg
+*.png
+*.pdf
+*.html
+!assets/escudos/*.png
+
+# python
+__pycache__/
+*.pyc
+.venv/
+datos.json
