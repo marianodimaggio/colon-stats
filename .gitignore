@@ -16,3 +16,9 @@ __pycache__/
 *.pyc
 .venv/
 datos.json
+
+# la web del repo sí va
+!docs/*.html
+
+# basura de macOS
+.DS_Store
